@@ -1,10 +1,10 @@
 import { useMemo } from "react";
-import { useSchoolDataStore } from "@/stores/useSchoolDataStore";
+import { useLocalizedSchoolData } from "@/hooks/useLocalizedSchoolData";
 import { CourseResolver } from "../resolvers/CourseResolver";
 import { useCourseStore } from "../stores/useCourseStore";
 import type { RecordsModule } from "@/types/records";
 export function useCourseModule() {
-  const data = useSchoolDataStore((state) => state.data)!;
+  const data = useLocalizedSchoolData()!;
   const applyAction = useCourseStore((state) => state.applyAction);
   const rows = useMemo(() => CourseResolver.resolveList(data), [data]);
   return {

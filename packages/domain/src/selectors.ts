@@ -1,6 +1,13 @@
-import type { EntityInput, EntityKind, SchoolData } from "./types";
+import type {
+  AcademicContent,
+  LocalizedContent,
+  EntityInput,
+  EntityKind,
+  SchoolData,
+} from "./types";
 
 export interface ListRow {
+  content?: LocalizedContent<AcademicContent>;
   id: string;
   title: string;
   subtitle: string;
@@ -103,6 +110,17 @@ export function filterRows(
 
 export function toInput(row: ListRow): EntityInput {
   return {
+    content: row.content
+      ? {
+          sourceLocale: row.content.sourceLocale,
+          translations: Object.fromEntries(
+            Object.entries(row.content.translations).map(([locale, value]) => [
+              locale,
+              { ...value },
+            ]),
+          ),
+        }
+      : undefined,
     name: row.title,
     description: row.description ?? "",
     hours: row.hours ?? 60,

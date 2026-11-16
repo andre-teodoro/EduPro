@@ -1,6 +1,7 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 import {
+  academicContent,
   DomainError,
   errorCode,
   type Course,
@@ -9,24 +10,49 @@ import {
 } from "@edupro/domain";
 import type { RecordFormConfig, SaveRecord } from "@/types/records";
 import { RecordResolver } from "@/resolvers/RecordResolver";
+import { supportedLocales } from "@edupro/ui/locale";
+import { TranslationEditor } from "./TranslationEditor";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
 export function RecordFormDialog({
   config,
+  localizable = false,
   row,
   courses,
   saveRecord,
   close,
 }: {
+  localizable?: boolean;
   config: RecordFormConfig;
   row?: ListRow;
   courses: Course[];
   saveRecord: SaveRecord;
   close: () => void;
 }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const locale = i18n.resolvedLanguage ?? i18n.language;
+  const [activeLocale, setActiveLocale] = useState(locale);
+  const formRef = useRef<HTMLFormElement>(null);
+  const [focusRequest, setFocusRequest] = useState(0);
+  useEffect(() => {
+    if (!focusRequest) return;
+    const frame = requestAnimationFrame(() =>
+      formRef.current
+        ?.querySelector<HTMLElement>('[aria-invalid="true"]')
+        ?.focus(),
+    );
+    return () => cancelAnimationFrame(frame);
+  }, [focusRequest]);
   const [input, setInput] = useState<EntityInput>(() =>
-    row ? RecordResolver.input(row) : RecordResolver.emptyInput(),
+    localizable
+      ? RecordResolver.localizedInput(
+          row,
+          locale,
+          supportedLocales.map((language) => language.code),
+        )
+      : row
+        ? RecordResolver.input(row)
+        : RecordResolver.emptyInput(),
   );
   const [error, setError] = useState(""),
     [fieldError, setFieldError] = useState("");
@@ -38,6 +64,13 @@ export function RecordFormDialog({
     setError("");
     setFieldError("");
   }
+  const fields = config.fields.filter(
+    (field) => !localizable || !["name", "description"].includes(field.key),
+  );
+  const courseOptions = courses.map((course) => ({
+    ...course,
+    ...academicContent(course, localizable ? activeLocale : locale),
+  }));
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
@@ -45,7 +78,11 @@ export function RecordFormDialog({
       close();
     } catch (cause) {
       setError(errorCode(cause));
-      setFieldError(cause instanceof DomainError ? (cause.field ?? "") : "");
+      const field = cause instanceof DomainError ? (cause.field ?? "") : "";
+      setFieldError(field);
+      const match = /^translations\.(.+)\.(name|description)$/.exec(field);
+      if (match) setActiveLocale(match[1]!);
+      setFocusRequest((previous) => previous + 1);
     }
   }
   return (
@@ -57,9 +94,19 @@ export function RecordFormDialog({
       title={t(config.title)}
       description={t(config.description)}
     >
-      <form noValidate onSubmit={submit}>
+      <form ref={formRef} noValidate onSubmit={submit}>
         <div className="form-grid two-columns">
-          {config.fields.map((field) => (
+          {localizable && input.content && (
+            <TranslationEditor
+              content={input.content}
+              active={activeLocale}
+              onActiveChange={setActiveLocale}
+              onChange={(content) => update("content", content)}
+              fieldError={fieldError}
+              legacy={!!row && !row.content}
+            />
+          )}
+          {fields.map((field) => (
             <label
               key={field.key}
               className={`field ${field.full ? "span-full" : ""}`}
@@ -129,7 +176,7 @@ export function RecordFormDialog({
             >
               <legend className="mb-2">{t("courseIds")}</legend>
               <div className="checkbox-group">
-                {courses.map((course) => (
+                {courseOptions.map((course) => (
                   <label className="checkbox-label" key={course.id}>
                     <input
                       type="checkbox"

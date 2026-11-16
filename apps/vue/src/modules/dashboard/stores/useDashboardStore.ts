@@ -1,11 +1,11 @@
+import { useLocalizedSchoolData } from "@/composables/useLocalizedSchoolData";
 import { computed } from "vue";
 import { defineStore } from "pinia";
-import { useSchoolDataStore } from "@/stores/useSchoolDataStore";
 import { DashboardResolver } from "../resolvers/DashboardResolver";
 export const useDashboardStore = defineStore("dashboard", () => {
-  const source = useSchoolDataStore();
+  const localized = useLocalizedSchoolData();
   const statistics = computed(() =>
-    source.data ? DashboardResolver.resolve(source.data) : null,
+    localized.value ? DashboardResolver.resolve(localized.value) : null,
   );
   return { statistics };
 });

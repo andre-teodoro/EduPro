@@ -8,3 +8,5 @@ export * from "./resolvers/DashboardResolver";
 export * from "./resolvers/NotificationResolver";
 export * from "./resolvers/AuthResolver";
 export * from "./resolvers/RecordResolver";
+
+export * from "./resolvers/LocalizedSchoolResolver";

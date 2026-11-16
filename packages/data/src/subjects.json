@@ -4,55 +4,191 @@
     "name": "Introdução à Administração",
     "description": "Formação teórica e prática integrada à matriz curricular.",
     "hours": 80,
-    "courseIds": ["c1", "c2", "c4"]
+    "courseIds": ["c1", "c2", "c4"],
+    "content": {
+      "sourceLocale": "pt-BR",
+      "translations": {
+        "pt-BR": {
+          "name": "Introdução à Administração",
+          "description": "Formação teórica e prática integrada à matriz curricular."
+        },
+        "en": {
+          "name": "Introduction to Business Administration",
+          "description": "Integrated theoretical and practical learning within the curriculum."
+        },
+        "es": {
+          "name": "Introducción a la Administración",
+          "description": "Formación teórica y práctica integrada en el plan de estudios."
+        }
+      }
+    }
   },
   {
     "id": "su2",
     "name": "Lógica de Programação",
     "description": "Formação teórica e prática integrada à matriz curricular.",
     "hours": 120,
-    "courseIds": ["c1"]
+    "courseIds": ["c1"],
+    "content": {
+      "sourceLocale": "pt-BR",
+      "translations": {
+        "pt-BR": {
+          "name": "Lógica de Programação",
+          "description": "Formação teórica e prática integrada à matriz curricular."
+        },
+        "en": {
+          "name": "Programming Logic",
+          "description": "Integrated theoretical and practical learning within the curriculum."
+        },
+        "es": {
+          "name": "Lógica de Programación",
+          "description": "Formación teórica y práctica integrada en el plan de estudios."
+        }
+      }
+    }
   },
   {
     "id": "su3",
     "name": "Design de Interfaces",
     "description": "Formação teórica e prática integrada à matriz curricular.",
     "hours": 80,
-    "courseIds": ["c1", "c3"]
+    "courseIds": ["c1", "c3"],
+    "content": {
+      "sourceLocale": "pt-BR",
+      "translations": {
+        "pt-BR": {
+          "name": "Design de Interfaces",
+          "description": "Formação teórica e prática integrada à matriz curricular."
+        },
+        "en": {
+          "name": "Interface Design",
+          "description": "Integrated theoretical and practical learning within the curriculum."
+        },
+        "es": {
+          "name": "Diseño de Interfaces",
+          "description": "Formación teórica y práctica integrada en el plan de estudios."
+        }
+      }
+    }
   },
   {
     "id": "su4",
     "name": "Comunicação e Expressão",
     "description": "Formação teórica e prática integrada à matriz curricular.",
     "hours": 60,
-    "courseIds": ["c2", "c3", "c4", "c5", "c6"]
+    "courseIds": ["c2", "c3", "c4", "c5", "c6"],
+    "content": {
+      "sourceLocale": "pt-BR",
+      "translations": {
+        "pt-BR": {
+          "name": "Comunicação e Expressão",
+          "description": "Formação teórica e prática integrada à matriz curricular."
+        },
+        "en": {
+          "name": "Communication and Expression",
+          "description": "Integrated theoretical and practical learning within the curriculum."
+        },
+        "es": {
+          "name": "Comunicación y Expresión",
+          "description": "Formación teórica y práctica integrada en el plan de estudios."
+        }
+      }
+    }
   },
   {
     "id": "su5",
     "name": "Ética e Sociedade",
     "description": "Formação teórica e prática integrada à matriz curricular.",
     "hours": 60,
-    "courseIds": ["c4", "c5"]
+    "courseIds": ["c4", "c5"],
+    "content": {
+      "sourceLocale": "pt-BR",
+      "translations": {
+        "pt-BR": {
+          "name": "Ética e Sociedade",
+          "description": "Formação teórica e prática integrada à matriz curricular."
+        },
+        "en": {
+          "name": "Ethics and Society",
+          "description": "Integrated theoretical and practical learning within the curriculum."
+        },
+        "es": {
+          "name": "Ética y Sociedad",
+          "description": "Formación teórica y práctica integrada en el plan de estudios."
+        }
+      }
+    }
   },
   {
     "id": "su6",
     "name": "Pesquisa de Mercado",
     "description": "Formação teórica e prática integrada à matriz curricular.",
     "hours": 80,
-    "courseIds": ["c2", "c6"]
+    "courseIds": ["c2", "c6"],
+    "content": {
+      "sourceLocale": "pt-BR",
+      "translations": {
+        "pt-BR": {
+          "name": "Pesquisa de Mercado",
+          "description": "Formação teórica e prática integrada à matriz curricular."
+        },
+        "en": {
+          "name": "Market Research",
+          "description": "Integrated theoretical and practical learning within the curriculum."
+        },
+        "es": {
+          "name": "Investigación de Mercados",
+          "description": "Formación teórica y práctica integrada en el plan de estudios."
+        }
+      }
+    }
   },
   {
     "id": "su7",
     "name": "Fundamentos da Educação",
     "description": "Formação teórica e prática integrada à matriz curricular.",
     "hours": 100,
-    "courseIds": ["c5"]
+    "courseIds": ["c5"],
+    "content": {
+      "sourceLocale": "pt-BR",
+      "translations": {
+        "pt-BR": {
+          "name": "Fundamentos da Educação",
+          "description": "Formação teórica e prática integrada à matriz curricular."
+        },
+        "en": {
+          "name": "Foundations of Education",
+          "description": "Integrated theoretical and practical learning within the curriculum."
+        },
+        "es": {
+          "name": "Fundamentos de la Educación",
+          "description": "Formación teórica y práctica integrada en el plan de estudios."
+        }
+      }
+    }
   },
   {
     "id": "su8",
     "name": "Estratégias Digitais",
     "description": "Formação teórica e prática integrada à matriz curricular.",
     "hours": 80,
-    "courseIds": ["c3", "c6"]
+    "courseIds": ["c3", "c6"],
+    "content": {
+      "sourceLocale": "pt-BR",
+      "translations": {
+        "pt-BR": {
+          "name": "Estratégias Digitais",
+          "description": "Formação teórica e prática integrada à matriz curricular."
+        },
+        "en": {
+          "name": "Digital Strategies",
+          "description": "Integrated theoretical and practical learning within the curriculum."
+        },
+        "es": {
+          "name": "Estrategias Digitales",
+          "description": "Formación teórica y práctica integrada en el plan de estudios."
+        }
+      }
+    }
   }
 ]

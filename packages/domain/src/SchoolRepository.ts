@@ -1,3 +1,4 @@
+import { ContentRulesResolver } from "./resolvers/ContentRulesResolver";
 import { JsonStorage, StorageError, type StoragePort } from "@edupro/core";
 import { seed } from "@edupro/data";
 import {
@@ -27,7 +28,20 @@ export class SchoolRepository {
   }
 
   load(): SchoolData {
-    return this.storage.read(isSchoolData) ?? structuredClone(seed);
+    const data = this.storage.read(isSchoolData) ?? structuredClone(seed);
+    for (const kind of ["courses", "subjects"] as const) {
+      for (const item of data[kind]) {
+        const original = seed[kind].find(
+          (row) =>
+            row.id === item.id &&
+            row.name === item.name &&
+            row.description === item.description,
+        );
+        if (!item.content && original)
+          item.content = structuredClone(original.content);
+      }
+    }
+    return data;
   }
 
   reset(): SchoolData {
@@ -45,6 +59,16 @@ export class SchoolRepository {
 
   save(kind: EditableKind, input: EntityInput, id?: string): SchoolData {
     return this.commit((data) => {
+      const existing =
+        id && kind !== "students"
+          ? data[kind].find((item) => item.id === id)
+          : undefined;
+      const content =
+        kind !== "students" && input.content
+          ? ContentRulesResolver.normalize(input.content)
+          : undefined;
+      if (content)
+        input = { ...input, ...content.translations[content.sourceLocale] };
       const name = RecordRulesResolver.validateName(input.name);
       if (id)
         requireField(
@@ -70,7 +94,21 @@ export class SchoolRepository {
       } else {
         if (kind === "courses") CourseRulesResolver.validate(input);
         else SubjectRulesResolver.validate(data, input);
+        const preservedContent =
+          existing?.content && !content
+            ? {
+                ...existing.content,
+                translations: {
+                  ...existing.content.translations,
+                  [existing.content.sourceLocale]: {
+                    name,
+                    description: input.description.trim(),
+                  },
+                },
+              }
+            : content;
         const fields = {
+          ...(preservedContent ? { content: preservedContent } : {}),
           name,
           description: input.description.trim(),
           hours: input.hours,

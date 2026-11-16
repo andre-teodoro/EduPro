@@ -9,6 +9,7 @@ const store = useCourseStore();
 </script>
 <template>
   <RecordFormDialog
+    localizable
     :row="row"
     :courses="store.courses"
     :config="CourseResolver.form(!!row)"

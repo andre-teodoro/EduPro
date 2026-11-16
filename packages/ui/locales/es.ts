@@ -1,5 +1,14 @@
 import type { CommonMessages } from "../locale";
 export default {
+  translations: "Traducciones",
+  sourceLocale: "Idioma de origen",
+  translationHint:
+    "El idioma de origen es obligatorio. Los dem\u00e1s son opcionales; las traducciones vac\u00edas usan el idioma de origen.",
+  legacyContentHint:
+    "Confirme el idioma de origen de este contenido existente antes de guardar.",
+  translationComplete: "Completa",
+  translationEmpty: "Vac\u00eda",
+  translationIncomplete: "Incompleta",
   skipContent: "Ir al contenido",
   app: "EduPro",
   workspace: "Gestión escolar",
@@ -137,6 +146,7 @@ export default {
   goHome: "Ir al resumen",
   loading: "Cargando...",
   errors: {
+    sourceLocaleRequired: "Seleccione el idioma de origen del contenido.",
     nameInvalid: "Introduce un nombre de entre 3 y 120 caracteres.",
     descriptionInvalid: "Introduce una descripción de hasta 2.000 caracteres.",
     hoursInvalid:

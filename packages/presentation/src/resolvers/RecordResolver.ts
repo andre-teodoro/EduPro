@@ -11,6 +11,22 @@ export class RecordResolver {
   static filter = filterRows;
   static input = toInput;
   static emptyInput = emptyInput;
+  static localizedInput(
+    row: ListRow | undefined,
+    locale: string,
+    locales: readonly string[],
+  ) {
+    const input = row ? toInput(row) : emptyInput();
+    input.content ??= {
+      sourceLocale: row ? "" : locale,
+      translations: row
+        ? { [locale]: { name: input.name, description: input.description } }
+        : {},
+    };
+    for (const code of locales)
+      input.content.translations[code] ??= { name: "", description: "" };
+    return input;
+  }
   static deleteConfirmation(): RecordConfirmation {
     return {
       title: "confirmDelete",

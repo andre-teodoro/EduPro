@@ -1,3 +1,4 @@
+import { useLocalizedSchoolData } from "@/composables/useLocalizedSchoolData";
 import { computed } from "vue";
 import { defineStore } from "pinia";
 import type { EntityInput, ListRow } from "@edupro/domain";
@@ -7,14 +8,15 @@ import { CourseRepository } from "../repositories/CourseRepository";
 import { CourseResolver } from "../resolvers/CourseResolver";
 export const useCourseStore = defineStore("courses", () => {
   const source = useSchoolDataStore();
+  const localized = useLocalizedSchoolData();
   const kind = "courses" as const;
   const createLabel = "newCourses" as const;
   const rows = computed(() =>
-    source.data ? CourseResolver.resolveList(source.data) : [],
+    localized.value ? CourseResolver.resolveList(localized.value) : [],
   );
-  const courses = computed(() => source.data?.courses ?? []);
+  const courses = computed(() => localized.value?.courses ?? []);
   function details(row: ListRow, locale = "pt-BR") {
-    return CourseResolver.details(source.data!, row, locale);
+    return CourseResolver.details(localized.value!, row, locale);
   }
   function save(input: EntityInput, id?: string) {
     source.commit(

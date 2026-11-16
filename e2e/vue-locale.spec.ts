@@ -51,7 +51,10 @@ for (const framework of ["vue", "react"]) {
     await sidebar.getByRole("combobox").selectOption("en");
     await page.getByRole("link", { name: "Courses", exact: true }).click();
     await page
-      .getByRole("button", { name: "Sistemas de Informação", exact: true })
+      .getByRole("button", {
+        name: "Information Systems",
+        exact: true,
+      })
       .first()
       .click();
     await expect(

@@ -1,10 +1,10 @@
 import { useMemo } from "react";
-import { useSchoolDataStore } from "@/stores/useSchoolDataStore";
+import { useLocalizedSchoolData } from "@/hooks/useLocalizedSchoolData";
 import { SubjectResolver } from "../resolvers/SubjectResolver";
 import { useSubjectStore } from "../stores/useSubjectStore";
 import type { RecordsModule } from "@/types/records";
 export function useSubjectModule() {
-  const data = useSchoolDataStore((state) => state.data)!;
+  const data = useLocalizedSchoolData()!;
   const applyAction = useSubjectStore((state) => state.applyAction);
   const rows = useMemo(() => SubjectResolver.resolveList(data), [data]);
   return {

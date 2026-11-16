@@ -1,4 +1,14 @@
+export interface AcademicContent {
+  name: string;
+  description: string;
+}
+export interface LocalizedContent<T> {
+  sourceLocale: string;
+  translations: Record<string, T>;
+}
 export interface Course {
+  // name/description mirror the source language for clients using the legacy form.
+  content?: LocalizedContent<AcademicContent>;
   id: string;
   name: string;
   description: string;
@@ -6,6 +16,7 @@ export interface Course {
   createdAt: string;
 }
 export interface Subject {
+  content?: LocalizedContent<AcademicContent>;
   id: string;
   name: string;
   description: string;
@@ -45,6 +56,7 @@ export interface SchoolData {
 export type EntityKind = "courses" | "subjects" | "students" | "enrollments";
 export type EditableKind = Exclude<EntityKind, "enrollments">;
 export interface EntityInput {
+  content?: LocalizedContent<AcademicContent>;
   name: string;
   description: string;
   hours: number;

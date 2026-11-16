@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, nextTick, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import {
+  academicContent,
   DomainError,
   errorCode,
   type Course,
@@ -9,28 +10,66 @@ import {
 } from "@edupro/domain";
 import type { RecordFormConfig, SaveRecord } from "@/types/records";
 import { RecordResolver } from "@/resolvers/RecordResolver";
+import { supportedLocales } from "@edupro/ui/locale";
+import TranslationEditor from "./TranslationEditor.vue";
 import Button from "@/components/ui/Button.vue";
 import Dialog from "@/components/ui/Dialog.vue";
 const props = defineProps<{
+  localizable?: boolean;
   config: RecordFormConfig;
   row?: ListRow;
   courses: Course[];
   saveRecord: SaveRecord;
 }>();
 const emit = defineEmits<{ close: [] }>();
-const { t } = useI18n();
+const { t, locale } = useI18n();
+const activeLocale = ref(locale.value);
 const input = ref(
-  props.row ? RecordResolver.input(props.row) : RecordResolver.emptyInput(),
+  props.localizable
+    ? RecordResolver.localizedInput(
+        props.row,
+        locale.value,
+        supportedLocales.map((language) => language.code),
+      )
+    : props.row
+      ? RecordResolver.input(props.row)
+      : RecordResolver.emptyInput(),
+);
+const fields = computed(() =>
+  props.config.fields.filter(
+    (field) =>
+      !props.localizable || !["name", "description"].includes(field.key),
+  ),
+);
+const courseOptions = computed(() =>
+  props.courses.map((course) => ({
+    ...course,
+    ...academicContent(
+      course,
+      props.localizable ? activeLocale.value : locale.value,
+    ),
+  })),
 );
 const error = ref(""),
   fieldError = ref("");
-function save() {
+async function save() {
   try {
     props.saveRecord(input.value, props.row?.id);
     emit("close");
   } catch (cause) {
     error.value = errorCode(cause);
     fieldError.value = cause instanceof DomainError ? (cause.field ?? "") : "";
+    const match = /^translations\.(.+)\.(name|description)$/.exec(
+      fieldError.value,
+    );
+    if (match) {
+      activeLocale.value = match[1]!;
+      await nextTick();
+      document.getElementById(`translation-${match[2]}-${match[1]}`)?.focus();
+    } else {
+      await nextTick();
+      document.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+    }
   }
 }
 </script>
@@ -49,8 +88,15 @@ function save() {
       "
     >
       <div class="form-grid two-columns">
+        <TranslationEditor
+          v-if="localizable && input.content"
+          v-model="input.content"
+          v-model:active="activeLocale"
+          :field-error="fieldError"
+          :legacy="!!row && !row.content"
+        />
         <label
-          v-for="field in config.fields"
+          v-for="field in fields"
           :key="field.key"
           class="field"
           :class="{ 'span-full': field.full }"
@@ -108,7 +154,7 @@ function save() {
           <legend class="mb-2">{{ t("courseIds") }}</legend>
           <div class="checkbox-group">
             <label
-              v-for="course in courses"
+              v-for="course in courseOptions"
               :key="course.id"
               class="checkbox-label"
               ><input

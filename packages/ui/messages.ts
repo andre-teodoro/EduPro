@@ -1,4 +1,13 @@
 export const ptBR = {
+  translations: "Tradu\u00e7\u00f5es",
+  sourceLocale: "Idioma de origem",
+  translationHint:
+    "O idioma de origem \u00e9 obrigat\u00f3rio. Outros idiomas s\u00e3o opcionais; tradu\u00e7\u00f5es vazias usam o idioma de origem.",
+  legacyContentHint:
+    "Confirme o idioma de origem deste conte\u00fado existente antes de salvar.",
+  translationComplete: "Preenchida",
+  translationEmpty: "N\u00e3o preenchida",
+  translationIncomplete: "Incompleta",
   skipContent: "Ir para o conteúdo",
   app: "EduPro",
   workspace: "Gestão escolar",
@@ -137,6 +146,7 @@ export const ptBR = {
   goHome: "Ir para a visão geral",
   loading: "Carregando...",
   errors: {
+    sourceLocaleRequired: "Selecione o idioma de origem do conte\u00fado.",
     nameInvalid: "Informe um nome entre 3 e 120 caracteres.",
     descriptionInvalid: "Informe uma descrição de até 2.000 caracteres.",
     hoursInvalid: "Informe uma carga horária inteira entre 1 e 20.000 horas.",

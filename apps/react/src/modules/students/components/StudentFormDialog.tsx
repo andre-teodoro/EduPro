@@ -1,6 +1,6 @@
 import type { ListRow } from "@edupro/domain";
 import { RecordFormDialog } from "@/components/records/RecordFormDialog";
-import { useSchoolDataStore } from "@/stores/useSchoolDataStore";
+import { useLocalizedSchoolData } from "@/hooks/useLocalizedSchoolData";
 import { useStudentStore } from "../stores/useStudentStore";
 import { StudentResolver } from "../resolvers/StudentResolver";
 export function StudentFormDialog({
@@ -10,7 +10,7 @@ export function StudentFormDialog({
   row?: ListRow;
   close: () => void;
 }) {
-  const courses = useSchoolDataStore((state) => state.data!.courses);
+  const courses = useLocalizedSchoolData()!.courses;
   const save = useStudentStore((state) => state.save);
   return (
     <RecordFormDialog

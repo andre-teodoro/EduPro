@@ -14,6 +14,7 @@ export function CourseFormDialog({
   const save = useCourseStore((state) => state.save);
   return (
     <RecordFormDialog
+      localizable
       row={row}
       close={close}
       courses={courses}

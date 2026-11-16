@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import { useSchoolDataStore } from "@/stores/useSchoolDataStore";
+import { useLocalizedSchoolData } from "@/hooks/useLocalizedSchoolData";
 import { DashboardResolver } from "../resolvers/DashboardResolver";
 export function useDashboardStore() {
-  const data = useSchoolDataStore((state) => state.data)!;
+  const data = useLocalizedSchoolData()!;
   return useMemo(() => DashboardResolver.resolve(data), [data]);
 }

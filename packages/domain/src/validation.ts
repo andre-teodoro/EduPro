@@ -40,6 +40,22 @@ const rows = (
   v.every((row) => record(row) && text(row.id) && validate(row)) &&
   new Set(v.map((row: Record<string, unknown>) => row.id)).size === v.length;
 
+function validContent(value: unknown): boolean {
+  if (value === undefined) return true;
+  if (
+    !record(value) ||
+    !text(value.sourceLocale) ||
+    !record(value.translations)
+  )
+    return false;
+  return (
+    Object.hasOwn(value.translations, value.sourceLocale) &&
+    Object.values(value.translations).every(
+      (v) => record(v) && text(v.name) && text(v.description),
+    )
+  );
+}
+
 export function isSchoolData(value: unknown): value is SchoolData {
   if (!record(value) || value.version !== 1) return false;
   const { courses, subjects, students, enrollments, confirmations } = value;
@@ -47,6 +63,7 @@ export function isSchoolData(value: unknown): value is SchoolData {
     !rows(
       courses,
       (r) =>
+        validContent(r.content) &&
         text(r.name) &&
         typeof r.description === "string" &&
         hours(r.hours) &&
@@ -58,6 +75,7 @@ export function isSchoolData(value: unknown): value is SchoolData {
     !rows(
       subjects,
       (r) =>
+        validContent(r.content) &&
         text(r.name) &&
         typeof r.description === "string" &&
         hours(r.hours) &&

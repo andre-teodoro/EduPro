@@ -9,6 +9,7 @@ const store = useSubjectStore();
 </script>
 <template>
   <RecordFormDialog
+    localizable
     :row="row"
     :courses="store.courses"
     :config="SubjectResolver.form(!!row)"

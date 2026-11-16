@@ -1,3 +1,4 @@
+import { useLocalizedSchoolData } from "@/composables/useLocalizedSchoolData";
 import { computed } from "vue";
 import { defineStore } from "pinia";
 import type { ListRow } from "@edupro/domain";
@@ -7,19 +8,20 @@ import { EnrollmentRepository } from "../repositories/EnrollmentRepository";
 import { EnrollmentResolver } from "../resolvers/EnrollmentResolver";
 export const useEnrollmentStore = defineStore("enrollments", () => {
   const source = useSchoolDataStore();
+  const localized = useLocalizedSchoolData();
   const kind = "enrollments" as const;
   const createLabel = "newEnrollments" as const;
   const rows = computed(() =>
-    source.data ? EnrollmentResolver.resolveList(source.data) : [],
+    localized.value ? EnrollmentResolver.resolveList(localized.value) : [],
   );
-  const courses = computed(() => source.data?.courses ?? []);
+  const courses = computed(() => localized.value?.courses ?? []);
   const options = computed(() =>
-    source.data
-      ? EnrollmentResolver.options(source.data)
+    localized.value
+      ? EnrollmentResolver.options(localized.value)
       : { students: [], courses: [] },
   );
   function details(row: ListRow, locale = "pt-BR") {
-    return EnrollmentResolver.details(source.data!, row, locale);
+    return EnrollmentResolver.details(localized.value!, row, locale);
   }
   function enroll(studentId: string, courseId: string) {
     source.commit(

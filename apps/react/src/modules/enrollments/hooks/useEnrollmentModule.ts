@@ -1,10 +1,10 @@
 import { useMemo } from "react";
-import { useSchoolDataStore } from "@/stores/useSchoolDataStore";
+import { useLocalizedSchoolData } from "@/hooks/useLocalizedSchoolData";
 import { EnrollmentResolver } from "../resolvers/EnrollmentResolver";
 import { useEnrollmentStore } from "../stores/useEnrollmentStore";
 import type { RecordsModule } from "@/types/records";
 export function useEnrollmentModule() {
-  const data = useSchoolDataStore((state) => state.data)!;
+  const data = useLocalizedSchoolData()!;
   const applyAction = useEnrollmentStore((state) => state.applyAction);
   const rows = useMemo(() => EnrollmentResolver.resolveList(data), [data]);
   return {
@@ -19,6 +19,6 @@ export function useEnrollmentModule() {
 }
 
 export function useEnrollmentOptions() {
-  const data = useSchoolDataStore((state) => state.data)!;
+  const data = useLocalizedSchoolData()!;
   return useMemo(() => EnrollmentResolver.options(data), [data]);
 }

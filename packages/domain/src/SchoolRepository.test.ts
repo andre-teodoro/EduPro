@@ -1,3 +1,4 @@
+import { academicContent } from "./localizedContent";
 import { describe, expect, it, beforeEach } from "vitest";
 import { StorageError, type StoragePort } from "@edupro/core";
 import { SchoolRepository, SCHOOL_STORAGE_KEY } from "./SchoolRepository";
@@ -169,5 +170,90 @@ describe("regras escolares", () => {
     expect(filterRows(rows, "joao")[0].title).toBe("João Pedro Souza");
     expect(filterRows(rows, rows[0].cpf!)[0].id).toBe(rows[0].id);
     expect(filterRows(rows, "", "c6")).toHaveLength(0);
+  });
+});
+
+describe("localized content", () => {
+  it("resolves requested content with source fallback and stable relationships", () => {
+    const data = repository.load();
+    const course = data.courses[0];
+    expect(academicContent(course, "en").name).toBe("Information Systems");
+    expect(academicContent(course, "de").name).toBe(course.name);
+    expect(data.enrollments[0].courseId).toBe("c1");
+  });
+  it("enriches unchanged legacy seed records without guessing custom content languages", () => {
+    const data = repository.load();
+    for (const course of data.courses) delete course.content;
+    for (const subject of data.subjects) delete subject.content;
+    data.courses[1].name = "Custom course";
+    storage.setItem(SCHOOL_STORAGE_KEY, JSON.stringify(data));
+    const loaded = repository.load();
+    expect(loaded.enrollments).toEqual(data.enrollments);
+    expect(loaded.courses[0].content?.sourceLocale).toBe("pt-BR");
+    expect(loaded.courses[1].content).toBeUndefined();
+    expect(academicContent(loaded.courses[1], "es").name).toBe("Custom course");
+  });
+  it("persists additional locales and removes empty optional translations", () => {
+    const course = repository.load().courses[0];
+    const input = {
+      ...emptyInput(),
+      name: course.name,
+      description: course.description,
+      hours: course.hours,
+      content: {
+        sourceLocale: "de",
+        translations: {
+          de: {
+            name: "Informatik",
+            description: "Studiengang f\u00fcr Informationssysteme.",
+          },
+          en: { name: "", description: "" },
+        },
+      },
+    };
+    const data = repository.save("courses", input, course.id);
+    expect(data.courses[0].name).toBe("Informatik");
+    expect(data.courses[0].content?.translations.en).toBeUndefined();
+    expect(new SchoolRepository(storage).load().courses[0]).toEqual(
+      data.courses[0],
+    );
+  });
+  it("rejects incomplete translations atomically with locale-specific field errors", () => {
+    const course = repository.load().courses[0];
+    const input = {
+      ...emptyInput(),
+      name: course.name,
+      description: course.description,
+      hours: course.hours,
+      content: {
+        sourceLocale: "pt-BR",
+        translations: {
+          "pt-BR": { name: course.name, description: course.description },
+          en: { name: "Information Systems", description: "" },
+        },
+      },
+    };
+    expect(() => repository.save("courses", input, course.id)).toThrow(
+      expect.objectContaining({ field: "translations.en.description" }),
+    );
+    expect(storage.getItem(SCHOOL_STORAGE_KEY)).toBeNull();
+  });
+  it("preserves translations when saved through a legacy form", () => {
+    const course = repository.load().courses[0];
+    const input = {
+      ...emptyInput(),
+      name: "Novo nome",
+      description: "New description",
+      hours: 100,
+    };
+    const updated = repository.save("courses", input, course.id).courses[0];
+    expect(academicContent(updated, "en").name).toBe("Information Systems");
+    expect(academicContent(updated, "pt-BR").name).toBe("Novo nome");
+  });
+  it("rejects persisted translations without a valid source locale", () => {
+    const data = repository.load();
+    data.courses[0].content!.sourceLocale = "missing";
+    storage.setItem(SCHOOL_STORAGE_KEY, JSON.stringify(data));
+    expect(() => repository.load()).toThrow(StorageError);
   });
 });
