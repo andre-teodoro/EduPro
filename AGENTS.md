@@ -40,3 +40,5 @@ Não adicione backend, envio real de e-mail, autenticação ficticiamente segura
 - `pnpm dev:vue` / `pnpm dev:react`: desenvolvimento em portas diferentes; para testar storage compartilhado, use `pnpm preview` sobre o build combinado.
 
 Não publique, crie remotes ou altere permissões do GitHub apenas para validar localmente. O workflow de Pages está preparado para execução no repositório de destino.
+
+A página de entrada é gerada por `scripts/build-pages.mjs` a partir de `scripts/landing/index.html`, com traduções em `packages/ui/landing.ts`. Ela usa os idiomas e o padrão de `packages/ui/locale.ts` e a mesma preferência `edupro:locale` dos apps. Edite essas fontes, nunca `dist/index.html`.

@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="One school, two implementations. Explore courses, subjects, students and enrollments with the same experience in Vue and React."
+    />
+    <title>EduPro — School management in Vue &amp; React</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        font-family: system-ui, sans-serif;
+        background: #f6f8fc;
+        color: #19283f;
+      }
+      main {
+        width: min(100%, 650px);
+        min-width: 0;
+        border: 1px solid #dce3ef;
+        border-radius: 20px;
+        background: white;
+        padding: clamp(24px, 6vw, 56px);
+        box-shadow: 0 4px 24px #172a4608;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      .badge {
+        display: inline-block;
+        padding: 8px 12px;
+        border-radius: 10px;
+        background: #eaf1ff;
+        color: #2563eb;
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .language-control {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        max-width: 100%;
+        font-size: 14px;
+        color: #53647c;
+      }
+      select {
+        min-height: 44px;
+        min-width: 0;
+        max-width: 100%;
+        padding: 8px;
+        border: 1px solid #dce3ef;
+        border-radius: 10px;
+        font: inherit;
+        background: #f6f8fc;
+        color: #19283f;
+      }
+      h1 {
+        font-size: 42px;
+        letter-spacing: -2px;
+        margin: 0 0 12px;
+      }
+      p {
+        color: #53647c;
+        line-height: 1.7;
+      }
+      nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin: 32px 0;
+      }
+      a {
+        padding: 16px;
+        border-radius: 12px;
+        background: #2563eb;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      :focus-visible {
+        outline: 3px solid #172a46;
+        outline-offset: 4px;
+      }
+      small {
+        display: block;
+        color: #53647c;
+        line-height: 1.6;
+      }
+      @media (max-width: 400px) {
+        nav {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <span class="badge" data-i18n="badge">Frontend portfolio</span>
+        <label class="language-control" for="language">
+          <span data-i18n="language">Language</span>
+          <select id="language">
+            <!-- LANGUAGE_OPTIONS -->
+          </select>
+        </label>
+      </header>
+      <h1>EduPro</h1>
+      <p data-i18n="description">
+        One school, two implementations. Explore courses, subjects, students and
+        enrollments with the same experience in Vue and React.
+      </p>
+      <nav aria-label="Choose a version">
+        <a href="./vue/" data-i18n="vue">Explore Vue</a>
+        <a href="./react/" data-i18n="react">Explore React</a>
+      </nav>
+      <small data-i18n="note"
+        >Fictional data and local storage. Both versions share your changes in
+        this browser. No emails are sent.</small
+      >
+    </main>
+    <script>
+      const config = /* LANDING_CONFIG */ {};
+      const storageKey = "edupro:locale";
+      const selector = document.getElementById("language");
+      function readPreference() {
+        try {
+          return localStorage.getItem(storageKey);
+        } catch {
+          return null;
+        }
+      }
+      function applyLocale(value) {
+        const locale = config.languages.some(
+          (language) => language.code === value,
+        )
+          ? value
+          : config.defaultLocale;
+        const messages = config.messages[locale];
+        document.documentElement.lang = locale;
+        document.title = messages.title;
+        document.querySelector('meta[name="description"]').content =
+          messages.description;
+        document
+          .querySelector("nav")
+          .setAttribute("aria-label", messages.navigation);
+        document.querySelectorAll("[data-i18n]").forEach((element) => {
+          element.textContent = messages[element.dataset.i18n];
+        });
+        selector.value = locale;
+      }
+      selector.addEventListener("change", () => {
+        applyLocale(selector.value);
+        try {
+          localStorage.setItem(storageKey, selector.value);
+        } catch {
+          /* Keep the selected language usable when storage is unavailable. */
+        }
+      });
+      window.addEventListener("storage", (event) => {
+        if (event.key === storageKey || event.key === null)
+          applyLocale(readPreference());
+      });
+      window.addEventListener("pageshow", () => applyLocale(readPreference()));
+      applyLocale(readPreference());
+    </script>
+  </body>
+</html>
