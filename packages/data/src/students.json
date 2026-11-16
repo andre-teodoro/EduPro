@@ -1,0 +1,86 @@
+[
+  {
+    "id": "st1",
+    "name": "Ana Beatriz Costa",
+    "cpf": "10000000019",
+    "birthDate": "1998-01-15",
+    "email": "aluno1@example.com"
+  },
+  {
+    "id": "st2",
+    "name": "Bruno Almeida",
+    "cpf": "10000000108",
+    "birthDate": "1999-02-15",
+    "email": "aluno2@example.com"
+  },
+  {
+    "id": "st3",
+    "name": "Camila Ferreira",
+    "cpf": "10000000280",
+    "birthDate": "2000-03-15",
+    "email": "aluno3@example.com"
+  },
+  {
+    "id": "st4",
+    "name": "Daniel Oliveira",
+    "cpf": "10000000361",
+    "birthDate": "2001-04-15",
+    "email": "aluno4@example.com"
+  },
+  {
+    "id": "st5",
+    "name": "Eduarda Santos",
+    "cpf": "10000000442",
+    "birthDate": "2002-05-15",
+    "email": "aluno5@example.com"
+  },
+  {
+    "id": "st6",
+    "name": "Felipe Rodrigues",
+    "cpf": "10000000523",
+    "birthDate": "2003-06-15",
+    "email": "aluno6@example.com"
+  },
+  {
+    "id": "st7",
+    "name": "Gabriela Lima",
+    "cpf": "10000000604",
+    "birthDate": "2004-07-15",
+    "email": "aluno7@example.com"
+  },
+  {
+    "id": "st8",
+    "name": "Henrique Martins",
+    "cpf": "10000000795",
+    "birthDate": "1998-08-15",
+    "email": "aluno8@example.com"
+  },
+  {
+    "id": "st9",
+    "name": "Isabela Rocha",
+    "cpf": "10000000876",
+    "birthDate": "1999-09-15",
+    "email": "aluno9@example.com"
+  },
+  {
+    "id": "st10",
+    "name": "João Pedro Souza",
+    "cpf": "10000000957",
+    "birthDate": "2000-10-15",
+    "email": "aluno10@example.com"
+  },
+  {
+    "id": "st11",
+    "name": "Larissa Gomes",
+    "cpf": "10000001090",
+    "birthDate": "2001-11-15",
+    "email": "aluno11@example.com"
+  },
+  {
+    "id": "st12",
+    "name": "Matheus Ribeiro",
+    "cpf": "10000001171",
+    "birthDate": "2002-12-15",
+    "email": "aluno12@example.com"
+  }
+]

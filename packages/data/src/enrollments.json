@@ -1,0 +1,93 @@
+[
+  {
+    "id": "e1",
+    "studentId": "st1",
+    "courseId": "c1",
+    "status": "active",
+    "createdAt": "2026-10-01T12:00:00.000Z"
+  },
+  {
+    "id": "e2",
+    "studentId": "st2",
+    "courseId": "c2",
+    "status": "active",
+    "createdAt": "2026-10-02T12:00:00.000Z"
+  },
+  {
+    "id": "e3",
+    "studentId": "st3",
+    "courseId": "c3",
+    "status": "active",
+    "createdAt": "2026-10-03T12:00:00.000Z"
+  },
+  {
+    "id": "e4",
+    "studentId": "st4",
+    "courseId": "c4",
+    "status": "suspended",
+    "createdAt": "2026-10-04T12:00:00.000Z"
+  },
+  {
+    "id": "e5",
+    "studentId": "st5",
+    "courseId": "c5",
+    "status": "active",
+    "createdAt": "2026-10-05T12:00:00.000Z"
+  },
+  {
+    "id": "e6",
+    "studentId": "st6",
+    "courseId": "c1",
+    "status": "active",
+    "createdAt": "2026-10-06T12:00:00.000Z"
+  },
+  {
+    "id": "e7",
+    "studentId": "st7",
+    "courseId": "c2",
+    "status": "active",
+    "createdAt": "2026-10-07T12:00:00.000Z"
+  },
+  {
+    "id": "e8",
+    "studentId": "st8",
+    "courseId": "c3",
+    "status": "active",
+    "createdAt": "2026-10-08T12:00:00.000Z"
+  },
+  {
+    "id": "e9",
+    "studentId": "st9",
+    "courseId": "c4",
+    "status": "suspended",
+    "createdAt": "2026-10-09T12:00:00.000Z"
+  },
+  {
+    "id": "e10",
+    "studentId": "st10",
+    "courseId": "c5",
+    "status": "active",
+    "createdAt": "2026-10-10T12:00:00.000Z"
+  },
+  {
+    "id": "e11",
+    "studentId": "st11",
+    "courseId": "c1",
+    "status": "active",
+    "createdAt": "2026-10-11T12:00:00.000Z"
+  },
+  {
+    "id": "e12",
+    "studentId": "st12",
+    "courseId": "c2",
+    "status": "active",
+    "createdAt": "2026-10-12T12:00:00.000Z"
+  },
+  {
+    "id": "e13",
+    "studentId": "st1",
+    "courseId": "c3",
+    "status": "active",
+    "createdAt": "2026-11-01T12:00:00.000Z"
+  }
+]

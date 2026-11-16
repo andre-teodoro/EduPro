@@ -1,0 +1,37 @@
+{
+  "dependencies": {
+    "@edupro/core": "workspace:*",
+    "@edupro/domain": "workspace:*",
+    "@edupro/ui": "workspace:*",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router": "^7.9.0",
+    "zustand": "^5.0.0",
+    "i18next": "^25.6.0",
+    "react-i18next": "^16.2.0",
+    "@reactuses/core": "^6.0.0",
+    "lucide-react": "^0.468.0",
+    "@radix-ui/react-dialog": "^1.1.0",
+    "@radix-ui/react-slot": "^1.2.0",
+    "class-variance-authority": "catalog:",
+    "clsx": "catalog:",
+    "tailwind-merge": "catalog:",
+    "@edupro/presentation": "workspace:*"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@tailwindcss/vite": "catalog:",
+    "tailwindcss": "catalog:"
+  },
+  "name": "@edupro/react",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5174",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit"
+  }
+}

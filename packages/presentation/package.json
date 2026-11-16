@@ -1,0 +1,14 @@
+{
+  "name": "@edupro/presentation",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "@edupro/domain": "workspace:*",
+    "@edupro/ui": "workspace:*"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  }
+}

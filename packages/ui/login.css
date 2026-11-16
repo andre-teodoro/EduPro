@@ -1,0 +1,111 @@
+.login-page {
+  min-height: 100svh;
+  background:
+    radial-gradient(
+      ellipse at 0% 35%,
+      color-mix(in oklch, var(--primary) 8%, transparent),
+      transparent 60%
+    ),
+    var(--background);
+}
+.login-preferences {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-width: calc(100% - 2rem);
+  z-index: 1;
+}
+.login-preferences .language-switcher {
+  width: 8rem;
+}
+.login-theme {
+  background: var(--card);
+}
+.login-grid {
+  display: grid;
+  max-width: 90rem;
+  min-height: 100svh;
+  margin: auto;
+  padding: 6rem 1.5rem 2rem;
+  gap: 2.5rem;
+}
+.login-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.login-copy h1 {
+  font-size: clamp(2.3rem, 4vw, 4rem);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  max-width: 38rem;
+  margin: 1.3rem 0;
+}
+.login-copy .muted {
+  font-size: 1.1rem;
+  max-width: 34rem;
+}
+.login-benefits {
+  display: grid;
+  gap: 1.5rem;
+}
+.login-benefits > div {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.login-benefits svg {
+  color: var(--primary);
+  width: 1.4rem;
+  flex-shrink: 0;
+}
+.login-benefits strong {
+  font-size: 0.875rem;
+}
+.login-benefits p {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+  margin-top: 0.25rem;
+}
+.login-form-area {
+  align-self: center;
+  width: 100%;
+  max-width: 30rem;
+  justify-self: center;
+}
+.login-card {
+  border: 1px solid var(--border);
+  border-radius: 1.75rem;
+  padding: 2rem 1.5rem;
+  background: var(--card);
+  box-shadow: 0 24px 80px -32px
+    color-mix(in oklch, var(--primary) 20%, transparent);
+}
+.login-card h2 {
+  font-size: 1.7rem;
+  font-weight: 750;
+  letter-spacing: -0.035em;
+  margin-bottom: 0.5rem;
+}
+@media (min-width: 1200px) {
+  .login-grid {
+    grid-template-columns: 1.08fr 0.92fr;
+    padding: 4rem;
+    gap: 5rem;
+  }
+  .login-intro {
+    justify-content: space-between;
+  }
+  .login-benefits {
+    margin-top: 2rem;
+  }
+  .login-card {
+    padding: 2.5rem;
+  }
+}

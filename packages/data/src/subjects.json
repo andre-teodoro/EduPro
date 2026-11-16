@@ -1,0 +1,58 @@
+[
+  {
+    "id": "su1",
+    "name": "Introdução à Administração",
+    "description": "Formação teórica e prática integrada à matriz curricular.",
+    "hours": 80,
+    "courseIds": ["c1", "c2", "c4"]
+  },
+  {
+    "id": "su2",
+    "name": "Lógica de Programação",
+    "description": "Formação teórica e prática integrada à matriz curricular.",
+    "hours": 120,
+    "courseIds": ["c1"]
+  },
+  {
+    "id": "su3",
+    "name": "Design de Interfaces",
+    "description": "Formação teórica e prática integrada à matriz curricular.",
+    "hours": 80,
+    "courseIds": ["c1", "c3"]
+  },
+  {
+    "id": "su4",
+    "name": "Comunicação e Expressão",
+    "description": "Formação teórica e prática integrada à matriz curricular.",
+    "hours": 60,
+    "courseIds": ["c2", "c3", "c4", "c5", "c6"]
+  },
+  {
+    "id": "su5",
+    "name": "Ética e Sociedade",
+    "description": "Formação teórica e prática integrada à matriz curricular.",
+    "hours": 60,
+    "courseIds": ["c4", "c5"]
+  },
+  {
+    "id": "su6",
+    "name": "Pesquisa de Mercado",
+    "description": "Formação teórica e prática integrada à matriz curricular.",
+    "hours": 80,
+    "courseIds": ["c2", "c6"]
+  },
+  {
+    "id": "su7",
+    "name": "Fundamentos da Educação",
+    "description": "Formação teórica e prática integrada à matriz curricular.",
+    "hours": 100,
+    "courseIds": ["c5"]
+  },
+  {
+    "id": "su8",
+    "name": "Estratégias Digitais",
+    "description": "Formação teórica e prática integrada à matriz curricular.",
+    "hours": 80,
+    "courseIds": ["c3", "c6"]
+  }
+]
