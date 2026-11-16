@@ -1,8 +1,23 @@
 # EduPro
 
+[![GitHub Pages](https://github.com/andre-teodoro/EduPro/actions/workflows/pages.yml/badge.svg)](https://github.com/andre-teodoro/EduPro/actions/workflows/pages.yml)
+[![Demo online](https://img.shields.io/badge/Demo-online-2563eb?logo=githubpages&logoColor=white)](https://andre-teodoro.github.io/EduPro/)
+[![Vue 3](https://img.shields.io/badge/Vue-3-4FC08D?logo=vuedotjs&logoColor=white)](https://andre-teodoro.github.io/EduPro/vue/)
+[![React 19](https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white)](https://andre-teodoro.github.io/EduPro/react/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+
 Aplicação de gestão escolar para portfólio, com duas implementações equivalentes em **Vue 3** e **React**, usando TypeScript e Vite.
 
 Este projeto não é um produto.
+
+## Demonstração
+
+**[Acessar o EduPro](https://andre-teodoro.github.io/EduPro/)**
+
+- [Explorar a versão Vue](https://andre-teodoro.github.io/EduPro/vue/)
+- [Explorar a versão React](https://andre-teodoro.github.io/EduPro/react/)
+
+Use **Try the demo** na tela de login para experimentar com dados fictícios. As alterações ficam apenas no navegador; as duas versões compartilham os dados e as preferências de idioma e tema.
 
 ## Executar
 
